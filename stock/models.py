@@ -14,5 +14,5 @@ class Information(models.Model):
     profit = models.IntegerField()
 
     def __str__(self):
-        return self.stock
+        return self.stock.name + ' (' + self.date + ')'
 
