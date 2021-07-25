@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '날짜');
+        data.addColumn('number', '매출액');
+        data.addColumn('number', '영업이익');
+
+        data.addRows([
+            {% for i in information_list %}
+            ['{{i.date}}', {{i.sales}}, {{i.profit}}],
+            {% endfor %}
+            ]);
+
+        var options = {
+            hAxis: {
+              title: '분기'
+            },
+            vAxis: {
+              title: '억원'
+            },
+            width: '100%',
+            height: 400,
+            };
+
+        var charts = new google.visualization.LineChart(document.getElementById('chart'));
+        charts.draw(data, options);
+        window.addEventListener('resize', drawChart,false)
+    }
+
+</script>
+
+<h3 style="padding-top: 30px;">{{stock.name}}</h3>
+
+{% if information_list %}
+    <h4 style="padding-top: 30px;">최근 분기 실적</h4>
+    <div id="chart_div"></div>
+    <div id="chart"></div>
+{% else %}
+    <p>정보가 없습니다.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

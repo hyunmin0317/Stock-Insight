@@ -5,4 +5,5 @@ app_name = 'stock'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('<str:code>/', views.detail),
 ]
