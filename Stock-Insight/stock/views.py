@@ -37,24 +37,18 @@ def detail(request, code):
     context = {'stock':stock, 'information_list': information_list}
     return render(request, 'stock/detail.html', context)
 
-def show(request):
-    date_list = []
+def sales(request):
+    name = []
+    name_list = []
     information_list = Information.objects.all()
-    for i in information_list:
-        date_list.append(i.date)
-    date_list = set(date_list)
-
     data_list = Date.objects.all()
 
-    # data = []
-    # data.append([1,2,3])
-    # data.append([4,5,6])
+    for i in information_list:
+        name.append(i.stock.name)
 
-    '''
-    [2020.03, 골프존, 골프존뉴딘홀딩스, 100, 500, 200]
-    [2020.06, 골프존, 200, 100, 500, 200]
-    ...
-    '''
+    for n in name:
+        if n not in name_list:
+            name_list.append(n)
 
-    context = {'information_list': information_list, 'data_list':data_list}
-    return render(request, 'stock/show.html', context)
+    context = {'name_list': name_list, 'data_list':data_list}
+    return render(request, 'stock/sales.html', context)

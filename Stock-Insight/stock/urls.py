@@ -5,6 +5,6 @@ app_name = 'stock'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('show/', views.show, name='show'),
+    path('sales/', views.sales, name='sales'),
     path('<str:code>/', views.detail),
 ]

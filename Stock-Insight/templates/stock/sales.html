@@ -9,14 +9,22 @@
     function drawChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', '날짜');
-        data.addColumn('number', '매출액');
-        data.addColumn('number', '영업이익');
+        {% for n in name_list%}
+        data.addColumn('number', '{{n}}');
+        {% endfor%}
 
         data.addRows([
-            {% for i in information_list %}
-            ['{{i.date}}', {{i.sales}}, {{i.profit}}],
+            {% for d in data_list%}
+            ['{{d}}',
+            {% for a in d.stock.all %}
+            {{a.sales}},
+            {% endfor %}
+            ],
+
             {% endfor %}
             ]);
+
+
 
         var options = {
             hAxis: {
@@ -36,23 +44,12 @@
 
 </script>
 
-
-
-{% if information_list %}
-    <h4 style="padding-top: 30px;">최근 분기 실적</h4>
+{% if data_list %}
+    <h4 style="padding-top: 30px;">최근 분기 영업이익 실적</h4>
     <div id="chart_div"></div>
     <div id="chart"></div>
 {% else %}
     <p>정보가 없습니다.</p>
 {% endif %}
-
-{% for d in data_list%}
-{{d}}
-{% for a in d.stock.all %}
-{{a.stock.name}}
-{% endfor %}
-{% endfor %}
-
-
 
 {% endblock %}
