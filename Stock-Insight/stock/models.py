@@ -15,3 +15,9 @@ class Information(models.Model):
 
     def __str__(self):
         return self.stock.name + ' (' + self.date + ')'
+
+class Date(models.Model):
+    date = models.CharField(max_length=7)
+    stock = models.ManyToManyField(Information, related_name='stock_information', blank=True)
+    def __str__(self):
+        return self.date

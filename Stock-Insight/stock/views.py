@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Stock, Information
+from .models import Stock, Information, Date
 from . import stock
 from django.http import JsonResponse
 from django.core.paginator import Paginator
@@ -13,10 +13,15 @@ def home(request):
     # stock.stock_save()
     # stock.information_delete()
     # stock.information_save(code_list)
+    stock.date_delete()
+    stock.date_save()
 
     for code in code_list:
-        stocks = Stock.objects.get(code=code)
-        stock_list.append(stocks)
+        try:
+            stocks = Stock.objects.get(code=code)
+            stock_list.append(stocks)
+        except Stock.DoesNotExist:
+            return JsonResponse({'message': 'Stock Does Not Exist '}, status=400)
 
     paginator = Paginator(stock_list, 10)
     page_obj = paginator.get_page(page)
@@ -28,7 +33,28 @@ def detail(request, code):
         stock = Stock.objects.get(code=code)
     except Stock.DoesNotExist:
         return JsonResponse({'message': 'Stock Does Not Exist '}, status=400)
-
     information_list = Information.objects.filter(stock=stock)
     context = {'stock':stock, 'information_list': information_list}
     return render(request, 'stock/detail.html', context)
+
+def show(request):
+    date_list = []
+    information_list = Information.objects.all()
+    for i in information_list:
+        date_list.append(i.date)
+    date_list = set(date_list)
+
+    data_list = Date.objects.all()
+
+    # data = []
+    # data.append([1,2,3])
+    # data.append([4,5,6])
+
+    '''
+    [2020.03, 골프존, 골프존뉴딘홀딩스, 100, 500, 200]
+    [2020.06, 골프존, 200, 100, 500, 200]
+    ...
+    '''
+
+    context = {'information_list': information_list, 'data_list':data_list}
+    return render(request, 'stock/show.html', context)

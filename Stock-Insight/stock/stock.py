@@ -1,5 +1,5 @@
 import pandas as pd
-from .models import Stock, Information
+from .models import Stock, Information, Date
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 
@@ -74,3 +74,25 @@ def save_all():
     stock_list = Stock.objects.all()
     for stock in stock_list:
         data_save(stock.code)
+
+def date_save():
+    date = []
+    information = Information.objects.all()
+    for i in information:
+        date.append(i.date)
+
+    date_list = []
+    for d in date:
+        if d not in date_list:
+            date_list.append(d)
+
+    for d in date_list:
+        data = Date(date=d)
+        data.save()
+        infor = Information.objects.filter(date=d)
+        for i in infor:
+            data.stock.add(i)
+
+def date_delete():
+    date = Date.objects.all()
+    date.delete()
