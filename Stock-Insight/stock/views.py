@@ -76,6 +76,3 @@ def save_data(request):
     stock.date_delete()
     stock.date_save()
     return render(request, 'save.html')
-
-def front(request):
-    return render(request, 'front.html')

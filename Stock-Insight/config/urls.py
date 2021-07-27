@@ -6,6 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('save/code/', views.save_code),
     path('save/data/', views.save_data),
-    path('front/', views.front),
     path('stock/', include('stock.urls')),
 ]

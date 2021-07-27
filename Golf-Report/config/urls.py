@@ -18,6 +18,6 @@ from django.urls import path
 from stock import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.home),
+    path('admin/', admin.site.urls),
 ]
