@@ -49,6 +49,22 @@ def sales(request):
     context = {'name_list': name_list, 'data_list':data_list}
     return render(request, 'stock/sales.html', context)
 
+def profit(request):
+    name = []
+    name_list = []
+    information_list = Information.objects.all()
+    data_list = Date.objects.all()
+
+    for i in information_list:
+        name.append(i.stock.name)
+
+    for n in name:
+        if n not in name_list:
+            name_list.append(n)
+
+    context = {'name_list': name_list, 'data_list':data_list}
+    return render(request, 'stock/profit.html', context)
+
 def save_code(request):
     stock.stock_delete()
     stock.stock_save()

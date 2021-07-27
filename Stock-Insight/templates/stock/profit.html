@@ -17,7 +17,7 @@
             {% for d in data_list%}
             ['{{d}}',
             {% for a in d.stock.all %}
-            {{a.sales}},
+            {{a.profit}},
             {% endfor %}
             ],
 
@@ -45,7 +45,7 @@
 </script>
 
 {% if data_list %}
-    <h4 style="padding-top: 30px;">최근 분기 매출액</h4>
+    <h4 style="padding-top: 30px;">최근 분기 영업이익</h4>
     <div id="chart"></div>
 {% else %}
     <p>정보가 없습니다.</p>
