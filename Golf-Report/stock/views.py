@@ -31,3 +31,12 @@ def save_data(request):
     stock.date_delete()
     stock.date_save()
     return render(request, 'save.html')
+
+def one(request):
+    return render(request, 'stock/one.html')
+
+def two(request):
+    return render(request, 'stock/two.html')
+
+def three(request):
+    return render(request, 'stock/three.html')

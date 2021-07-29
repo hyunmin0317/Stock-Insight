@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {% load static %}
 {% load sass_tags %}
-<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -24,6 +24,15 @@
 <body>
     <header>
         <h1>Stock Insight<br><span>[ Golf Report ]</span></h1>
+        <center>
+            <div class="row gx-2" style="padding-top: 30px; background-color=#ffffff">
+                <center>
+                    <a href="https://www.notion.so/52a42d97cd9f44478dec83097ba8a26d"><button class="btn btn-sm btn-outline-secondary" type="button">Notion</button></a>
+                    <a href="{% url 'stock:home' %}"><button class="btn btn-outline-success" type="button">Home</button></a>
+                    <a href="https://github.com/sunjungAn/Elastic-Form"><button class="btn btn-sm btn-outline-secondary" type="button">Github</button></a>
+                </center>
+            </div>
+        </center>
     </header>
 
     {% block content %}
