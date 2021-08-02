@@ -18,7 +18,7 @@ from django.urls import path, include
 from stock import views
 
 urlpatterns = [
-    path('', include('stock.urls')),
+    path('stock/golf/', include('stock.urls')),
     path('save/code/', views.save_code),
     path('save/data/', views.save_data),
     path('admin/', admin.site.urls),
